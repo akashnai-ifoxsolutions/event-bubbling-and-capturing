@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event bubble and capture</title>
+</head>
+<body>
+    <div id="outer" style="padding: 50px; background-color: lightblue;">
+        Outer
+        <div id="middle" style="padding: 30px; background-color: lightgreen;">
+          Middle
+          <div id="inner" style="padding: 20px; background-color: lightcoral;">
+            Inner
+          </div>
+        </div>
+      </div>
+
+      <script>
+        // add event listener with bubbling (default)
+
+        document.getElementById('outer').addEventListener('click', () => {
+            alert('Outer Box - Bubbling phase');
+        });
+
+        document.getElementById('middle').addEventListener('click', () => {
+            alert('Middle Box - Bubbling phase');
+        });
+
+        document.getElementById('inner').addEventListener('click', () => {
+            alert('Inner Box - Bubbling phase');
+        });
+
+        // Add event listener with capturing
+
+        document.getElementById('outer').addEventListener('click', () => {
+            alert('Outer Box - Capturing  phase')
+        }, true);
+
+        document.getElementById('middle').addEventListener('click', () => {
+            alert('Middle Box - Capturing  phase')
+        }, true);
+
+        document.getElementById('inner').addEventListener('click', () => {
+            alert('Inner Box - Capturing  phase')
+        }, true);
+
+        // stop propogation on inner box
+        document.getElementsById('inner').addEventListener('click', (e) => {
+            e.stopPropogation(); // stop further propogation
+            alert('Inner Box - Stopped propogation')
+        })
+
+
+      </script>
+</body>
+</html>
